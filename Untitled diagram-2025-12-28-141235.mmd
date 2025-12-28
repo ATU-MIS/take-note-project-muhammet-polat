@@ -1,0 +1,59 @@
+sequenceDiagram
+    actor User
+    participant System as Note System
+    participant File as notes.txt
+
+    rect rgb(200, 150, 255)
+    note over User,File: Login
+    User->>System: Kullanıcı adı & şifre girer
+    System->>System: Bilgileri doğrula
+    System-->>User: Giriş başarılı
+    end
+
+    rect rgb(200, 150, 255)
+    note over User,File: Load Notes
+    System->>File: Notları dosyadan yükle
+    File-->>System: Not verileri
+    end
+
+    rect rgb(200, 150, 255)
+    note over User,File: View Notes
+    User->>System: Notları görüntüle
+    System->>File: Notları oku
+    File-->>System: Not listesi
+    System-->>User: Notları göster
+    end
+
+    rect rgb(200, 150, 255)
+    note over User,File: Add Note
+    User->>System: Yeni not (başlık, içerik)
+    System->>File: Notu dosyaya ekle
+    File-->>System: Kayıt başarılı
+    System-->>User: Not eklendi
+    end
+
+    rect rgb(200, 150, 255)
+    note over User,File: Edit Note
+    User->>System: Düzenlenecek notu seç
+    System->>File: Mevcut notu oku
+      System->>System: new msg
+    File-->>System: Not içeriği
+    User->>System: Güncellenmiş içeriği gir
+    System->>File: Notu güncelle
+    File-->>System: Güncelleme başarılı
+    System-->>User: Not düzenlendi
+    end
+
+    rect rgb(200, 150, 255)
+    note over User,File: Delete Note
+    User->>System: Silinecek notu seç
+    System->>File: Notu sil
+    File-->>System: Silme başarılı
+    System-->>User: Not silindi
+    end
+
+    rect rgb(200, 150, 255)
+    note over User,File: Save Notes
+    System->>File: Notları kaydet
+    File-->>System: Kayıt tamamlandı
+    end
